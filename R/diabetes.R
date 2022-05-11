@@ -11,17 +11,29 @@ library(esquisse)
 library(dplyr)
 library(ggplot2)
 library(lmtest)#diabets
+##############################################################################################################
+
 View(diabetes)
 class (diabetes)
 
 correlacao<- cor(diabetes)
 corrplot(correlacao,method = "color")
 
-#ts.plot(diabts)
 
-#esquisser(diabetes)
+esquisser(diabetes)
 
+##############################################################################################################
+#Histograma de dispersão
 
+ggplot(diabetes) +
+  aes(x = BloodPressure) +
+  geom_histogram(bins = 100L, fill = "#4682B4") +
+  labs(
+    x = "Pressão Sanguínea",
+    y = "Número de pessoas",
+    title = "Histograma pressão Sangúinea "
+  ) +
+  theme_linedraw()
 ##############################################################################################################
 #Relação Idade e glicose
 
@@ -33,16 +45,7 @@ ggplot(diabetes) +
  theme(plot.title = element_text(face = "italic", 
  hjust = 0.5))
 ##############################################################################################################
-#Relação insulina e espessura da pele 
-
-ggplot(diabetes) +
-  aes(x = Insulin, y = SkinThickness) +
-  geom_point(shape = "bullet", size = 2.15, colour = "#B22222") +
-  labs(x = "Espessura da Pele", y = "Insulina", title = " Espessura da pele com Insulina") +
-  theme_linedraw()
-
-##############################################################################################################
-#relação de dispersão entre insulna e espessura da pele
+#Gráfico de dispersão insulina e espessura da pele 
 
 ggplot(diabetes) +
  aes(x = Insulin, y = SkinThickness) +
@@ -60,16 +63,15 @@ dist(diatestes)
 plot(hclust(dist(diatestes)))
 plot(hclust(dist (diatestes), method = "centroid"))
 k_betes<-kmeans(diatestes,6)
-plot()
 hclust(dist(diatestes), "median")
 
 ##############################################################################################################
-#plots dendogramas
-plot(hclust(dist(diatestes)))
-plot(hclust(dist (diatestes), method = 'single'))
+#plots clusterização
+plot(hclust(dist(diabetes)))
+plot(hclust(dist (diabetes), method = 'single'))
 View(cl)
-cl<- kmeans(diatestes,4)
-plot(diatestes,cl$cluster)
+cl<- kmeans(diabetes,9)
+plot(diabetes)
 sort(cl$centers)
 
 ##############################################################################################################
