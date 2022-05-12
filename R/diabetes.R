@@ -1,25 +1,27 @@
 # Execute import dataset no arquivo diabetes.csv
-library(caret)
-library(rpart)
-library(rpart.plot)
-library(caTools)
-library(MultivariateAnalysis)
-library(corrplot)
-library(forecast)
-library(randomForest)
-library(tidyverse)
-library(data.table)
-library(prophet)
-library(esquisse)
-library(dplyr)
-library(ggplot2)
-library(lmtest)#diabets
+
+  library(caret)
+  library(rpart)
+  library(rpart.plot)
+  library(caTools)
+  library(MultivariateAnalysis)
+  library(corrplot)
+  library(forecast)
+  library(randomForest)
+  library(tidyverse)
+  library(data.table)
+  library(prophet)
+  library(esquisse)
+  library(dplyr)
+  library(ggplot2)
+  library(lmtest)#diabets
+
 ##############################################################################################################
 
 View(dbets)
 class (dbets)
 
-correlacao<- cor(dbets)
+correlacao<- cor(diabetes)
 corrplot(correlacao,method = "color")
 esquisser(diabetes)
 
@@ -118,7 +120,9 @@ plot(confusao)
 #random Forest
 ##############################################################################################################
 classificador<- randomForest(x = treino, y = treino$Outcome, ntree = 10)
-previsao<-predict(classificador, newdata = teste[-9],type = 'class')
+previsao<-predict(classificador, newdata = teste[-9], type = 'class')
 confusao<- table(teste[,9],previsao)
 confusionMatrix(confusao)
 plot(confusao)
+
+class(treino$Outcome)
