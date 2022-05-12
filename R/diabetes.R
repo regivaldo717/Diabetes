@@ -1,9 +1,12 @@
 # Execute import dataset no arquivo diabetes.csv
-install.packages("MultivariateAnalysis")
-
+library(caret)
+library(rpart)
+library(rpart.plot)
+library(caTools)
 library(MultivariateAnalysis)
 library(corrplot)
 library(forecast)
+library(randomForest)
 library(tidyverse)
 library(data.table)
 library(prophet)
@@ -13,13 +16,11 @@ library(ggplot2)
 library(lmtest)#diabets
 ##############################################################################################################
 
-View(diabetes)
-class (diabetes)
+View(dbets)
+class (dbets)
 
-correlacao<- cor(diabetes)
+correlacao<- cor(dbets)
 corrplot(correlacao,method = "color")
-
-
 esquisser(diabetes)
 
 ##############################################################################################################
@@ -69,11 +70,9 @@ hclust(dist(diatestes), "median")
 #plots clusterização
 plot(hclust(dist(diabetes)))
 plot(hclust(dist (diabetes), method = 'single'))
-View(cl)
 cl<- kmeans(diabetes,9)
 plot(diabetes)
 sort(cl$centers)
-
 ##############################################################################################################
 #distâncias
 Distancia(diabetes,1) #Distancia euclidiana.
@@ -98,3 +97,28 @@ Distancia(diabetes,19)#Dissimilaridade de Haman: 1-((a+d)-(b+c))/(a+b+c+d).
 Distancia(diabetes,20)#Dissimilaridade de Yule: 1-(ad-bc)/(ad+bc). Dados mistos
 Distancia(diabetes,21)#Dissimilaridade de Gower
 Distancia(diabetes,22)#Dissimilaridade de Gower 2
+
+#tree decision
+##############################################################################################################
+diabetes$Outcome<- factor(diabetes$Outcome, levels = c(0,1))
+set.seed(1)
+divisao<- sample.split(diabetes$Outcome, SplitRatio = 0.75)
+treino<- subset(diabetes, divisao ==T)
+teste<- subset(diabetes, divisao == F)
+classificador<- rpart(formula = Outcome ~., data = diabetes )
+print(classificador)
+rpart.plot(classificador, type = 3)
+previsao<-predict(classificador, newdata = teste[-9],type = 'class')
+previsao
+confusao<- table(teste[,9],previsao)
+confusionMatrix(confusao)
+plot(confusao)
+
+
+#random Forest
+##############################################################################################################
+classificador<- randomForest(x = treino, y = treino$Outcome, ntree = 10)
+previsao<-predict(classificador, newdata = teste[-9],type = 'class')
+confusao<- table(teste[,9],previsao)
+confusionMatrix(confusao)
+plot(confusao)
