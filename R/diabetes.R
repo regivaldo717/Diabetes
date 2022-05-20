@@ -3,6 +3,7 @@
   library(caret)
   library(rpart)
   library(rpart.plot)
+  library(cluster)
   library(caTools)
   library(MultivariateAnalysis)
   library(corrplot)
@@ -10,16 +11,18 @@
   library(randomForest)
   library(tidyverse)
   library(data.table)
+  library(e1071)
   library(prophet)
   library(esquisse)
   library(dplyr)
   library(ggplot2)
+  library(FuzzyR)
   library(lmtest)#diabets
 
 ##############################################################################################################
-
-View(dbets)
-class (dbets)
+require
+#View(dbets)
+#class (dbets)
 
 correlacao<- cor(diabetes)
 corrplot(correlacao,method = "color")
@@ -75,6 +78,46 @@ plot(hclust(dist (diabetes), method = 'single'))
 cl<- kmeans(diabetes,9)
 plot(diabetes)
 sort(cl$centers)
+plot(cl)
+
+#tree decision
+##############################################################################################################
+diabetes$Outcome<- factor(diabetes$Outcome, levels = c(0,1))
+set.seed(1)
+divisao<- sample.split(diabetes$Outcome, SplitRatio = 0.75)
+treino<- subset(diabetes, divisao ==T)
+teste<- subset(diabetes, divisao == F)
+classificador<- rpart(formula = Outcome ~., data = diabetes )
+print(classificador)
+rpart.plot(classificador, type = 3)
+previsao<-predict(classificador, newdata = teste[-9],type = 'class')
+previsao
+confusao<- table(teste[,9],previsao)
+confusionMatrix(confusao)
+plot(confusao)
+
+
+#cmeans
+##############################################################################################################
+diabetes_cm<- cmeans(diabetes,2,dist = 'euclidean',method = 'cmeans')
+diabetes_cm$centers
+previsao<- diabetes_cm$cluster
+clusplot(diabetes,previsao, color = T, lines = T,labels = 4)
+diabetes_cm$membership
+table(diabetes$Outcome,previsao)
+confusao(diabetes$Outcome,previsao)
+confusionMatrix(confusao)
+#random Forest
+##############################################################################################################
+classificador<- randomForest(x = treino, y = treino$Outcome, ntree = 10)
+previsao<-predict(classificador, newdata = teste[-9], type = 'class')
+confusao<- table(teste[,9],previsao)
+confusionMatrix(confusao)
+plot(confusao)
+
+class(treino$Outcome)
+
+
 ##############################################################################################################
 #distâncias
 Distancia(diabetes,1) #Distancia euclidiana.
@@ -100,29 +143,19 @@ Distancia(diabetes,20)#Dissimilaridade de Yule: 1-(ad-bc)/(ad+bc). Dados mistos
 Distancia(diabetes,21)#Dissimilaridade de Gower
 Distancia(diabetes,22)#Dissimilaridade de Gower 2
 
-#tree decision
+
 ##############################################################################################################
-diabetes$Outcome<- factor(diabetes$Outcome, levels = c(0,1))
-set.seed(1)
-divisao<- sample.split(diabetes$Outcome, SplitRatio = 0.75)
-treino<- subset(diabetes, divisao ==T)
-teste<- subset(diabetes, divisao == F)
-classificador<- rpart(formula = Outcome ~., data = diabetes )
-print(classificador)
-rpart.plot(classificador, type = 3)
-previsao<-predict(classificador, newdata = teste[-9],type = 'class')
-previsao
-confusao<- table(teste[,9],previsao)
-confusionMatrix(confusao)
-plot(confusao)
+#fuzzy
 
+#UMBRAE = Erro Relativo Relativo Limitado Médio Não Escalado
+#RMSE = Erro quadrático médio
+#MAPE = Erro de Porcentagem Absoluta Média
+#MAE =  média aritmética dos erros absolutos. 
+#MASE = 
+#GMRAE = 
+#sMAPE = erros simétricos na faixa de previsão assimétrica
 
-#random Forest
+fuzzyr.accuracy(diabetes$Insulin,diabetes$SkinThickness)
 ##############################################################################################################
-classificador<- randomForest(x = treino, y = treino$Outcome, ntree = 10)
-previsao<-predict(classificador, newdata = teste[-9], type = 'class')
-confusao<- table(teste[,9],previsao)
-confusionMatrix(confusao)
-plot(confusao)
+#gradiente
 
-class(treino$Outcome)
