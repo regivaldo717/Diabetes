@@ -25,7 +25,7 @@ require
 #class (dbets)
 
 correlacao<- cor(diabetes)
-corrplot(correlacao,method = "color")
+corrplot(correlacao,method = "color", type = 3)
 esquisser(diabetes)
 
 ##############################################################################################################
