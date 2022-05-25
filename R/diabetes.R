@@ -1,5 +1,4 @@
 # Execute import dataset no arquivo diabetes.csv
-
   library(caret)
   library(rpart)
   library(rpart.plot)
