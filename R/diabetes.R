@@ -142,7 +142,6 @@ Distancia(diabetes,20)#Dissimilaridade de Yule: 1-(ad-bc)/(ad+bc). Dados mistos
 Distancia(diabetes,21)#Dissimilaridade de Gower
 Distancia(diabetes,22)#Dissimilaridade de Gower 2
 
-
 ##############################################################################################################
 #fuzzy
 
@@ -155,6 +154,7 @@ Distancia(diabetes,22)#Dissimilaridade de Gower 2
 #sMAPE = erros simétricos na faixa de previsão assimétrica
 
 fuzzyr.accuracy(diabetes$Insulin,diabetes$SkinThickness)
+
 ##############################################################################################################
 #gradiente
 
