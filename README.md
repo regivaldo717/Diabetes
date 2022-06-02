@@ -13,7 +13,14 @@ Esta é Base de dados referente à mulheres com idade mínima de menos 21 anos, 
 Legenda da base de dados:
 Este trabalho tem o objetivo a utilização de alguns algorítimos para verificação da possibilidade de diabetes baseando-se nas variáveis a seguir.
 
-Pregnancies: Número de vezes que engravidou 
+
+### Legenda
+| Nome da Coluna                           | Descrição
+| Pregnancies                           | Número de vezes que engravidou 
+
+
+
+
 Glucose: Concentração de glicose plasmática a 2 horas em um teste oral de tolerância à glicose 
 BloodPressure: pressão arterial diastólica (mm Hg) 
 SkinThinckness: espessura da dobra cutânea do tríceps (mm) 
