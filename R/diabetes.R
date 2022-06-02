@@ -17,14 +17,14 @@
   library(ggplot2)
   library(FuzzyR)
   library(lmtest)#diabets
-
+plot(diabetes)
 ##############################################################################################################
 require
 #View(dbets)
 #class (dbets)
 
 correlacao<- cor(diabetes)
-corrplot(correlacao,method = "color", type = 3)
+corrplot(correlacao,method = "color", type = ("full"))
 esquisser(diabetes)
 
 ##############################################################################################################
@@ -88,7 +88,7 @@ treino<- subset(diabetes, divisao ==T)
 teste<- subset(diabetes, divisao == F)
 classificador<- rpart(formula = Outcome ~., data = diabetes )
 print(classificador)
-rpart.plot(classificador, type = 3)
+rpart.plot(classificador, type = 3 )
 previsao<-predict(classificador, newdata = teste[-9],type = 'class')
 previsao
 confusao<- table(teste[,9],previsao)
