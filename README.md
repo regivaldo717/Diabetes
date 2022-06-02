@@ -1,8 +1,8 @@
 # Diabetes
-##Classificação e predição de Dados sobre Diabetes
-##Regivaldo Sousa
+## Classificação e predição de Dados sobre Diabetes
+### Regivaldo Sousa
 
-Avaliação dos casos de Diabetes baseado em diagnósticos
+## Avaliação dos casos de Diabetes baseado em diagnósticos
 
  O trabalho tem por objetivo  explorar dados sobre diabetes por meio de ferramentas para 
  classificação e agrupamento desses dados utilizando técnicas de aprendizagem de máquina.
