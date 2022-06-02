@@ -1,16 +1,9 @@
 # Diabetes
-\documentclass{article}
-\usepackage[utf8]{inputenc}
+##Classificação e predição de Dados sobre Diabetes
+###Regivaldo Sousa
 
-\title{Classificação e Agrupamento de Dados sobre Diabetes}
-\author{Regivaldo Sousa }
-\date{May 2022}
+Avaliação dos casos de Diabetes baseado em diagnósticos
 
-\begin{document}
-
-\maketitle
-
-\section{Avaliação dos casos de Diabetes baseado em diagnósticos}
  O trabalho tem por objetivo  explorar dados sobre diabetes por meio de ferramentas para 
  classificação e agrupamento desses dados utilizando técnicas de aprendizagem de máquina.
  será apresentada uma matriz de correlação entre todos os fatores para verificar os tópicos 
