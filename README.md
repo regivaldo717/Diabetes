@@ -13,7 +13,7 @@ Esta é Base de dados referente à mulheres com idade mínima de menos 21 anos, 
 Legenda da base de dados:
 Este trabalho tem o objetivo a utilização de alguns algorítimos para verificação da possibilidade de diabetes baseando-se nas variáveis a seguir.
 
-
+>
 ### Legenda
 | Nome da Coluna                        | Descrição
 | :------------------------------ | :-------------: |:----------------
@@ -26,3 +26,4 @@ Este trabalho tem o objetivo a utilização de alguns algorítimos para verifica
 | PedigreeFunction | Predisposição a ter diabetes   
 | Age | Idade (anos)   
 | Outcome | variável de classe (0 ou 1) sendo zero não teve diabetes e 1 teve diabetes
+>
