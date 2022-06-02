@@ -1,6 +1,6 @@
 # Diabetes
 ##Classificação e predição de Dados sobre Diabetes
-###Regivaldo Sousa
+##Regivaldo Sousa
 
 Avaliação dos casos de Diabetes baseado em diagnósticos
 
